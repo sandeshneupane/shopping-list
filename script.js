@@ -60,16 +60,17 @@ function listpressed(event){
 		}
     }
 
-function numberentered(event){
-    
-}
 
 function sendtext(){
+
+	if (phonenumber.value.length !== 10){alert("Insert Correct Phone Number");return;}
     var alllists =[];
+    alllists.push(phonenumber.value);
+
 	for(var i=0;i < mylists.length; i++) {
     alllists.push(mylists[i].innerHTML);
     }
-    if(alllists.length ===0){alert("There is no item");return;}
+    if(alllists.length < 2 ){alert("There is no item");return;}
     
    
     
@@ -79,7 +80,9 @@ function sendtext(){
             body: JSON.stringify(alllists)
           })
            .then(response => response.json())
-           console.log(alllists);  
+           alert("Thank you!!! You will get text message if your number is registered with us. "); 
+           phonenumber.value="";
+
             
 }
 
@@ -91,7 +94,7 @@ userlist.addEventListener("keypress",keypressed);
 reset.addEventListener("click",resetpressed);
 ul.addEventListener("click",listpressed);
 
-phonenumber.addEventListener("keypress",numberentered);
+//phonenumber.addEventListener("keypress",numberentered);
 text.addEventListener("click",sendtext);
 
 
