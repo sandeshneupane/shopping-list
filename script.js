@@ -4,6 +4,13 @@ var userlist = document.getElementById("userlist");
 var ul = document.getElementById("unorderlist");
 var li = document.querySelector("li");
 
+var phonenumber = document.getElementById("phonenumber");
+var text = document.getElementById("text");
+var mylists= document.getElementById('unorderlist').getElementsByTagName('li');
+
+
+
+
 
 
 
@@ -53,9 +60,40 @@ function listpressed(event){
 		}
     }
 
+function numberentered(event){
+    
+}
+
+function sendtext(){
+    var alllists =[];
+	for(var i=0;i < mylists.length; i++) {
+    alllists.push(mylists[i].innerHTML);
+    }
+    if(alllists.length ===0){alert("There is no item");return;}
+    
+   
+    
+      fetch('http://api.localhost:1337', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(alllists)
+          })
+           .then(response => response.json())
+           console.log(alllists);  
+            
+}
+
+
 
 
 enter.addEventListener("click",enterkeyclicked);
 userlist.addEventListener("keypress",keypressed);
 reset.addEventListener("click",resetpressed);
 ul.addEventListener("click",listpressed);
+
+phonenumber.addEventListener("keypress",numberentered);
+text.addEventListener("click",sendtext);
+
+
+
+
